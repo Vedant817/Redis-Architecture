@@ -9,7 +9,7 @@ export enum RedisDataType {
 
 export interface RedisValue { //! Represents a single key’s value inside Redis. (Entry)
     type: RedisDataType;
-    value: "any";
+    value: any;
     ttl?: number; //? Time to live in milliseconds
     lastAccessed?: number;
     createdAt: number
