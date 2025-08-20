@@ -1,0 +1,7 @@
+1. Redis uses a single threaded architecture for command processing. This single threaded design eliminates the complexity and overhead of thread synchronization, lock contention and context switching.
+
+2. Single thread can process thousands of commands per second without blocking, similar to the Node.js single thread handling the I/O.
+
+3. Memory Management and Persistence: Redis Databases creates a point-in-time snapshots, while Append Only File Log every write operation. This dual approach lets balance between the performance and the durability.
+
+4. Redis uses compressed list encoding for small lists and hash tables for larger one, automatically switches between the representation as data grows.
