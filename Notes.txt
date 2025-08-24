@@ -5,3 +5,17 @@
 3. Memory Management and Persistence: Redis Databases creates a point-in-time snapshots, while Append Only File Log every write operation. This dual approach lets balance between the performance and the durability.
 
 4. Redis uses compressed list encoding for small lists and hash tables for larger one, automatically switches between the representation as data grows.
+
+
+Skip-List architecture
+1. A SkipList is a probabilistic data structure that allows for efficient searching, insertion, and deletion of elements in a sorted list. Redis uses it to implement Sorted Sets (ZSETs), which store unique members associated with a numerical score.
+
+2. A SkipList consists of multiple layers of sorted, linked lists. The bottom-most layer (level 0) contains all the elements in sorted order.
+
+3. Each subsequent layer is a sub-list of the one below it, containing a subset of the nodes. Nodes are randomly assigned a level when they are inserted. A node with higher level is "promoted" to appear in more of the upper layer.
+
+4. To To find a node, you start at the highest level of the list and traverse forward until you find a node whose value is greater than or equal to the target. Then you drop down to the next level and repeat the process. This multilevel structure allows you to "skip" large numbers of nodes, hence the name SkipList.
+
+5. To insert a new node, you first perform a search to find the correct insertion point at each level. Then, a random level is assigned to the new node. The new node is then inserted into all levels up to its assigned level, with pointers updated to link it into the list at each level.
+
+6.  Deletion is similar to insertion. You first find the node to be deleted by searching. Once found, you remove it from all the levels it appears in by updating the pointers of the preceding nodes.
